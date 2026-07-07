@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<mavlink>
+  <enums>
+    <enum name="MAV_ALB_RADIOLINK_DEVICE">
+      <entry value="1" name="MAV_ALB_RADIOLINK_DEVICE_SEC_RX"></entry>
+      <entry value="2" name="MAV_ALB_RADIOLINK_DEVICE_SEC_TX"></entry>
+      <entry value="3" name="MAV_ALB_RADIOLINK_DEVICE_SVE_RX"></entry>
+      <entry value="4" name="MAV_ALB_RADIOLINK_DEVICE_SVE_TX"></entry>
+    </enum>
+    <enum name="MAV_ALB_RADIOLINK_FLAGS">
+      <entry value="1" name="MAV_ALB_RADIOLINK_FLAGS_SYNC">
+        <description> sync is done </description>
+      </entry>
+      <entry value="2" name="MAV_ALB_RADIOLINK_FLAGS_ONLINE">
+        <description> device is online </description>
+      </entry>
+      <entry value="4" name="MAV_ALB_RADIOLINK_FLAGS_TELEM">
+        <description> telem is ok </description>
+      </entry>
+      <entry value="8" name="MAV_ALB_RADIOLINK_FLAGS_AESSYN">
+        <description> aes change progress </description>
+      </entry>
+      <entry value="16" name="MAV_ALB_RADIOLINK_FLAGS_AESFIN">
+        <description> apply aes key </description>
+      </entry>
+      <entry value="32" name="MAV_ALB_RADIOLINK_FLAGS_SAVE">
+        <description> save received values in eeprom </description>
+      </entry>
+      <entry value="64" name="MAV_ALB_RADIOLINK_FLAGS_CHANNELS">
+        <description> indicates that this device works in channels mode </description>
+      </entry>
+      <entry value="128" name="MAV_ALB_RADIOLINK_FLAGS_SCANNING">
+        <description> indicates that this device is in scan mode, or scan data is not received</description>
+      </entry>
+      <entry value="256" name="MAV_ALB_RADIOLINK_FLAGS_SCAN_STOP">
+        <description> indicates that we request to stop scan</description>
+      </entry>
+      <entry value="512" name="MAV_ALB_RADIOLINK_FLAGS_INCORRECT_FIRMWARE">
+        <description> indicates that we request to stop scan</description>
+      </entry>
+      <entry value="1024" name="MAV_ALB_RADIOLINK_FLAGS_SECTOR_AES_NOT_ENABLED">
+        <description></description>
+      </entry>
+      <entry value="2048" name="MAV_ALB_RADIOLINK_FLAGS_UAV_CONTROL_LOSS">
+        <description></description>
+      </entry>
+    </enum>
+    <enum name="MAV_ALB_COMP_ID">
+      <entry value="65" name="MAV_ALB_COMP_ID_ALBGS"> </entry>
+      <entry value="66" name="MAV_ALB_COMP_ID_RELAY_ALBGS"> </entry>
+      <entry value="67" name="MAV_ALB_COMP_ID_RELAYED_UAV"> </entry>
+      <entry value="68" name="MAV_ALB_COMP_ID_RELAYED_GIMBAL"> </entry>
+      <entry value="69" name="MAV_ALB_COMP_ID_RELAYED_TRACKER"> </entry>
+      <entry value="70" name="MAV_ALB_COMP_ID_ARD"> </entry>
+      <entry value="192" name="MAV_ALB_COMP_ID_">
+        <description>Component that lives on the onboard computer (companion computer) and has some generic functionalities, such as settings system parameters and monitoring the status of some processes that don't directly speak mavlink and so on.</description>
+      </entry>
+      <entry value="193" name="MAV_ALB_COMP_ID_TRACKER">
+        <description>Component that lives on the onboard computer (companion computer) and has some generic functionalities, such as settings system parameters and monitoring the status of some processes that don't directly speak mavlink and so on.</description>
+      </entry>
+      <entry value="194" name="MAV_ALB_COMP_ID_PANAMA_GU">
+        <description>Component that lives on the onboard computer (companion computer) and has some generic functionalities, such as settings system parameters and monitoring the status of some processes that don't directly speak mavlink and so on.</description>
+      </entry>
+      <entry value="195" name="MAV_ALB_COMP_ID_PANAMA_AU">
+        <description>Component that lives on the onboard computer (companion computer) and has some generic functionalities, such as settings system parameters and monitoring the status of some processes that don't directly speak mavlink and so on.</description>
+      </entry>
+    </enum>
+    <enum name="PARACHUTE_ACTION">
+      <description>Parachute actions. Trigger release and enable/disable auto-release.</description>
+      <entry value="101" name="ALB_PARACHUTE_PREFLIGHT_RESET">
+        <description>Pre-flight check: parachute reset.</description>
+      </entry>
+      <entry value="102" name="ALB_PARACHUTE_RELEASE">
+        <description>Release parachute and kill motors.</description>
+      </entry>
+    </enum>
+    <enum name="MAV_DATA_STREAM">
+      <entry value="13" name="MAV_DATA_STREAM_ALBATROS_1">
+        <description>Albatros data where default send frequency 1Hz </description>
+      </entry>
+      <entry value="14" name="MAV_DATA_STREAM_ALBATROS_2_4">
+        <description>Albatros data where default send frequency from 2 to 4 Hz</description>
+      </entry>
+      <entry value="15" name="MAV_DATA_STREAM_ALBATROS_4">
+        <description>Albatros data where default send frequency 4Hz </description>
+      </entry>
+      <entry value="16" name="MAV_DATA_STREAM_ALBATROS_10">
+        <description>Albatros data where default send frequency 10Hz </description>
+      </entry>
+      <entry value="17" name="MAV_DATA_STREAM_ALBATROS_ES"></entry>
+    </enum>
+    <enum name="MAV_CMD">
+      <entry value="43003" name="MAV_CMD_ALB_POS_CORR" hasLocation="false" isDestination="false">
+        <description>Set the distance to be repeated on mission resume</description>
+        <param index="1" label="lat" units="degE7"></param>
+        <param index="2" label="lon" units="degE7"></param>
+        <param index="3">Empty.</param>
+        <param index="4">Empty.</param>
+        <param index="5">Empty.</param>
+        <param index="6">Empty.</param>
+        <param index="7">Empty.</param>
+      </entry>
+      <entry value="43004" name="MAV_CMD_DO_SET_WIND" hasLocation="false" isDestination="false">
+        <description>Sets wind speed and direction from which the wind blows. Will be set only when
+          EK2 is current active AHRS_EHF_TYPE</description>
+        <param index="1" label="Speed" units="m/s" minValue="0"></param>
+        <param index="2" label="Direction" units="cdeg"></param>
+        <param index="3">Empty</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="43005" name="MAV_CMD_DO_SET_HOME_WO_GPS" hasLocation="true"
+        isDestination="false">
+        <description>Sets a point at home and turns off checks for PreArm.</description>
+        <param index="1">Empty</param>
+        <param index="2" label="AHRS use GPS" minValue="0" maxValue="2" increment="1">(0=disable,
+          1=enable, 2=enable with height)</param>
+        <param index="3" label="Home is set" minValue="0" maxValue="1" increment="1">(0=false,
+          1=true)</param>
+        <param index="4" label="AHRS EKF Type" minValue="0" maxValue="11" increment="1">(0=disable,
+          2=EKF2, 3=EKF3, 11=External AHRS)</param>
+        <param index="5" label="Latitude">Latitude</param>
+        <param index="6" label="Longitude">Longitude</param>
+        <param index="7" label="Altitude" units="m">Altitude</param>
+      </entry>
+      <entry value="43006" name="MAV_CMD_DO_BMSTU_MOUNT" hasLocation="true" isDestination="false">
+        <description>Sets engine,stabilisator and restart function.</description>
+        <param index="1" label="Set engine" minValue="0" maxValue="1" increment="1">(0=disable, 1=enable)</param>
+        <param index="2" label="Set stab" minValue="0" maxValue="1" increment="1">(0=disable, 1=enable)</param>
+        <param index="3" label="Restart mount" minValue="0" maxValue="1" increment="1">(0=disable, 1=restart)</param>
+        <param index="4">Empty</param>
+        <param index="5">Empty</param>
+        <param index="6">Empty</param>
+        <param index="7">Empty</param>
+      </entry>
+      <entry value="43007" name="MAV_CMD_DO_BMSTU_MOUNT_SET_PID" hasLocation="true" isDestination="false">
+        <description>Set PID params from ardupilot parameters</description>
+         <param index="1" label="PID type" minValue="0" maxValue="5" increment="1">(0=PID Z, 1=PID X, 2=PID Angle Z, 3=PID Angle X, 4=PID Tracking Z, 5=PID Tracking X)</param>
+         <param index="2">Empty.</param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+      </entry>
+      <entry value="43008" name="MAV_CMD_DO_TRACKING_SPEED_CONTROL" hasLocation="true" isDestination="false">
+        <description>Set Tracker control speed</description>
+         <param index="1" label="Speed Z" units="deg/s"></param>
+         <param index="2" label="Speed X" units="deg/s"></param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+      </entry>
+	<entry value="44000" name="SET_TRACKING" hasLocation="false" isDestination="false">
+         <description>Send coomand to tracking with bbox</description>
+         <param index="1" label="top_left_x" units="pixel"></param>
+         <param index="2" label="top_left_y" units="pixel"></param>
+         <param index="3" label="height" units="pixel"></param>
+         <param index="4" label="wigth" units="pixel"></param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+     </entry>
+	<entry value="44001" name="STOP_TRACKING" hasLocation="false" isDestination="false">
+         <description>Stop tracking</description>
+         <param index="1">Empty.</param>
+         <param index="2">Empty.</param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+     </entry>
+	<entry value="44002" name="SEND_TRACKING_BBOX" hasLocation="false" isDestination="false">
+         <description>Sends a bbox around the tracked object</description>
+         <param index="1" label="top_left_x" units="pixel"></param>
+         <param index="2" label="top_left_y" units="pixel"></param>
+         <param index="3" label="height" units="pixel"></param>
+         <param index="4" label="wigth" units="pixel"></param>
+         <param index="5">Empty.</param>
+         <param index="6" label="size_of_image" units="parrots"></param>
+         <param index="7">Empty.</param>
+     </entry>
+	<entry value="44003" name="SEND_REMOTE_CONTROL" hasLocation="false" isDestination="false">
+         <description>Don't use now</description>
+         <param index="1" label="x" units="."></param>
+         <param index="2" label="y" units="."></param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+     </entry>
+	<entry value="44005" name="SEND_ERROR_JETSON" hasLocation="false" isDestination="false">
+         <description>Don't use now</description>
+         <param index="1" label="code_of_error" units="int"></param>
+         <param index="2">Empty.</param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+     </entry>
+	<entry value="44007" name="MAV_CMD_PID_ERRORS" hasLocation="false" isDestination="false">
+         <description>Set the distance to be repeated on mission resume</description>
+         <param index="1" label="error_yaw" units="rad"></param>
+         <param index="2" label="error_pitch" units="rad"></param>
+         <param index="3">Empty.</param>
+         <param index="4">Empty.</param>
+         <param index="5">Empty.</param>
+         <param index="6">Empty.</param>
+         <param index="7">Empty.</param>
+     </entry>
+     <entry value="44015" name="MAV_CMD_PANAMA_CONTROL" hasLocation="false" isDestination="false">
+       <description>Set the distance to be repeated on mission resume</description>
+       <param index="1" label="control">1 - lock, 2 - unlock</param>
+       <param index="2">Empty</param>
+       <param index="3">Empty.</param>
+       <param index="4">Empty.</param>
+       <param index="5">Empty.</param>
+       <param index="6">Empty.</param>
+       <param index="7">Empty.</param>
+     </entry>
+    </enum>
+    <enum name="CAM_HEART_STATUS">
+      <entry value="0" name="CAM_HEART_DISCONNECT">
+        <description>Camera disconnect.</description>
+      </entry>
+      <entry value="1" name="CAM_HEART_INACTIVE">
+        <description>Camera inactive.</description>
+      </entry>
+      <entry value="2" name="CAM_HEART_SUSPEND">
+        <description>Camera suspend.</description>
+      </entry>
+      <entry value="3" name="CAM_HEART_ACTIVE">
+        <description>Camera active.</description>
+      </entry>
+    </enum>
+    <enum name="MAV_MOUNT_MODE">
+      <entry value="7" name="MAV_MOUNT_MODE_EXTERNAL_TRACKER_TARGETING">
+        <description>Auto targeting via Nvidia Jetson module or other</description>
+      </entry>
+      <entry value="8" name="MAV_MOUNT_MODE_GIMBAL_TRACKING">
+        <description>Gimbal tracks the plane's current course</description>
+      </entry>
+    </enum>
+  </enums>
+  <messages>
+    <message id="187" name="HEARTBEAT_CAMERA">
+      <description>This message informs the ground station when the camera is connected or
+        disconnected.</description>
+      <field type="uint8_t" name="camera_1" enum="CAM_HEART_STATUS">Camera 1 status</field>
+      <field type="uint8_t" name="camera_2" enum="CAM_HEART_STATUS">Camera 2 status</field>
+      <field type="uint8_t" name="camera_3" enum="CAM_HEART_STATUS">Camera 3 status</field>
+      <field type="uint8_t" name="camera_4" enum="CAM_HEART_STATUS">Camera 4 status</field>
+      <field type="uint8_t" name="camera_5" enum="CAM_HEART_STATUS">Camera 5 status</field>
+      <field type="uint8_t" name="camera_6" enum="CAM_HEART_STATUS">Camera 6 status</field>
+    </message>
+    <message id="188" name="ALB_MOUNT_RC">
+      <description></description>
+      <field type="uint8_t" name="chan6_raw" units="us">RC channel 6 value. camera zoom</field>
+      <field type="uint8_t" name="chan7_raw" units="us">RC channel 7 value. mnt yaw</field>
+      <field type="uint8_t" name="chan8_raw" units="us">RC channel 8 value. mnt pitch</field>
+    </message>
+    <message id="199" name="ALB_TRACKING_POINT">
+      <description>Command to change tracking point for onboard computer. X and Y to 0xFFFF - stop
+        tracking</description>
+      <field type="uint16_t" name="x_coordinate" units="pixels">X coordinate from left to right
+        (unsigned).</field>
+      <field type="uint16_t" name="y_coordinate" units="pixels">Y from top to down (unsigned)</field>
+      <field type="int8_t" name="status_and_id" units="custom">If highest byte is 0 -- it allow to
+        set tracking point. If highest bite is 1 -- it allow to set unique number of detected
+        objects (the 4 lowest unsigned bytes)</field>
+    </message>
+    <message id="218" name="ALB_CAMERA_INFO">
+      <description>Alb_Camera_Backend camera information message</description>
+      <field type="uint16_t" name="width_mm" units="millimeters">phisic matrix size width * 100</field>
+      <field type="uint16_t" name="height_mm" units="millimeters">phisic matrix size height * 100</field>
+      <field type="uint8_t" name="camera_num">hight 4 bits - camera type; low 4 bits camera num</field>
+      <field type="uint16_t" name="focal_len" units="millimeters">(focal_len/200) * 65536</field>
+      <field type="uint16_t" name="width_pix" units="pixels">pixels matrix size width</field>
+      <field type="uint16_t" name="height_pix" units="pixels">pixels matrix size height</field>
+      <field type="uint16_t" name="zoom">camera zoom * 100</field>
+      <field type="uint8_t" name="palitra">camera palitra</field>
+      <field type="uint16_t" name="fmin">focus lenght minimal (format: flen * 100)</field>
+      <field type="uint16_t" name="fmax">focus lenght maximal</field>
+    </message>
+    <message id="220" name="TIME_WHEN_ARMED">
+      <description>Time time_boot_ms when autopilot armed</description>
+      <field type="uint32_t" name="msec">Timestamp (milliseconds)</field>
+    </message>
+    <message id="222" name="ALBATROS_10_MSG">
+      <description>Message that sends 10 times per sec for Albatros</description>
+      <field type="float" name="roll" units="rad">Roll angle (rad, -pi..+pi)</field>
+      <field type="float" name="pitch" units="rad">Pitch angle (rad, -pi..+pi)</field>
+    </message>
+    <message id="223" name="ALB_RADIOLINK">
+      <description>Alb_Camera_Backend camera information message</description>
+      <field type="uint8_t" name="type" enum="ALB_RADIOLINK_DEVICE"> device type </field>
+      <field type="uint32_t" name="freq">freq in KHz. Use -1 to indicate no change when setting a value.</field>
+      <field type="uint16_t" name="flags" enum="MAV_ALB_RADIOLINK_FLAGS"></field>
+      <field type="uint8_t" name="link_quality">link quality in percent, last 2 minutes</field>
+      <field type="uint8_t" name="data1">optional data</field>
+      <field type="uint8_t[4]" name="data2">optional data</field>
+      <field type="uint32_t[12]" name="frequencies">frequencies</field>
+      <field type="uint16_t" name="bitrate">bitrate this channel currently sending or receiving</field>
+    </message>
+    <message id="196" name="ALB_RADIOLINK_SCAN_INTERNAL">
+      <description>Alb_Camera_Backend camera information message</description>
+      <field type="uint8_t" name="type" enum="ALB_RADIOLINK_DEVICE"> device type </field>
+      <field type="uint32_t" name="freq">start freq in KHz</field>
+      <field type="uint16_t" name="points">points to scan</field>
+      <field type="uint16_t" name="step">step of scan in khz</field>
+    </message>
+    <message id="197" name="ALB_RADIOLINK_INTERNAL">
+      <description>Alb_Camera_Backend camera information message</description>
+      <field type="uint8_t" name="type" enum="ALB_RADIOLINK_DEVICE"> device type </field>
+      <field type="uint32_t" name="freq">freq in KHz</field>
+      <field type="uint16_t" name="flags" enum="MAV_ALB_RADIOLINK_FLAGS"></field>
+      <field type="uint8_t" name="link_quality">link quality in percent, last 2 minutes</field>
+      <field type="uint32_t" name="txid"></field>
+    </message>
+    <message id="198" name="ALB_RADIOLINK_AES">
+      <description></description>
+      <field type="uint8_t" name="type" enum="ALB_RADIOLINK_DEVICE"></field>
+      <field type="uint8_t" name="update_both"> update both tx and rx keys</field>
+      <field type="uint8_t[32]" name="aes_key"></field>
+    </message>
+    <message id="224" name="ALBATROS_2_4_MSG">
+      <description>Message that sends from 2 to 4 times per sec for Albatros</description>
+      <field type="float" name="airspeed" units="m/s">Current airspeed in m/s</field>
+      <field type="float" name="groundspeed" units="m/s">Current ground speed in m/s</field>
+      <field type="uint16_t" name="throttle" units="%">Current throttle setting in integer percent,
+        0 to 100</field>
+      <field type="float" name="alt" units="m">Current altitude (MSL), in meters</field>
+      <field type="int16_t" name="vibration_z">Vibration levels on Z-axis</field>
+      <field type="uint8_t" name="camera_num">hight 4 bits - camera type(0- unknown; 1-XcoreLA;
+        2-XcoreFTII; 3-Visca); low 4 bits camera num</field>
+      <field type="uint16_t" name="focal_len">Camera focal length (focal_len/200) * 65536</field>
+      <field type="int32_t" name="lat" units="degE7">Latitude (WGS84, EGM96 ellipsoid), in degrees *
+        1E7. global possition</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude (WGS84, EGM96 ellipsoid), in degrees
+        * 1E7, global position</field>
+      <field type="float" name="climb" units="m/s">Current climb rate in meters/second</field>
+      <field type="uint32_t" name="time_boot_ms" units="ms">Timestamp of the component clock since
+        boot time in milliseconds.</field>
+    </message>
+    <message id="227" name="ALBATROS_1_MSG">
+      <description>Message that sends 4 times per sec for Albatros</description>
+      <field type="float" name="yaw" units="rad">Yaw angle (rad, -pi..+pi)</field>
+      <field type="float" name="target_alt" units="m">Altitude in meters in AMSL altitude, not WGS84
+        if absolute or relative, above terrain if GLOBAL_TERRAIN_ALT_INT</field>
+      <field type="uint16_t" name="current_nav_index">Current index of waypoint</field>
+      <field type="int8_t" name="battery_remaining" units="%">Remaining battery energy: (0%: 0,
+        100%: 100), -1: autopilot does not estimate the remaining battery</field>
+      <field type="uint16_t" name="hdg" units="cdeg">Vehicle heading (yaw angle) in degrees * 100,
+        0.0..359.99 degrees. If unknown, set to: UINT16_MAX</field>
+      <field type="uint8_t" name="fix_type" enum="GPS_FIX_TYPE">See the GPS_FIX_TYPE enum.</field>
+      <field type="uint8_t" name="satellites_visible">Number of satellites visible</field>
+      <field type="float" name="wind_direction" units="deg">Wind direction (that wind is coming
+        from).</field>
+      <field type="float" name="wind_speed" units="m/s">Wind speed in ground plane.</field>
+    </message>
+    <message id="228" name="ALBATROS_4_MSG">
+      <description>Message that sends 1 times per sec for Albatros</description>
+      <field type="int32_t" name="alt" units="mm">Altitude in meters, expressed as * 1000
+        (millimeters), AMSL (not WGS84 - note that virtually all GPS modules provide the AMSL as
+        well)</field>
+      <field type="int32_t" name="relative_alt" units="mm">Altitude above ground in meters,
+        expressed as * 1000 (millimeters)</field>
+      <field type="uint16_t" name="hdop">GPS hdop</field>
+      <field type="uint32_t" name="flight_time" units="s"></field>
+      <field type="uint8_t" name="sensor_id" units="idx">sensor, which we using to get lat lon</field>
+      <field type="int32_t" name="lat" units="degE7">Latitude (WGS84, EGM96 ellipsoid). gps position</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude (WGS84, EGM96 ellipsoid). gps
+        position</field>
+    </message>
+    <message id="229" name="ALB_SYS_STATUS">
+      <description>The general system state. If the system is following the MAVLink standard, the
+        system state is mainly defined by three orthogonal states/modes: The system mode, which is
+        either LOCKED (motors shut down and locked), MANUAL (system under RC control), GUIDED
+        (system with autonomous position control, position setpoint controlled manually) or AUTO
+        (system guided by path/waypoint planner). The NAV_MODE defined the current flight state:
+        LIFTOFF (often an open-loop maneuver), LANDING, WAYPOINTS or VECTOR. This represents the
+        internal navigation state machine. The system status shows whether the system is currently
+        active or not and if an emergency occurred. During the CRITICAL and EMERGENCY states the MAV
+        is still considered to be active, but should start emergency procedures autonomously. After
+        a failure occurred it should first move from active to critical to allow manual intervention
+        and then move to emergency after a certain timeout.</description>
+      <field type="uint32_t" name="onboard_control_sensors_present" enum="MAV_SYS_STATUS_SENSOR"
+        display="bitmask" print_format="0x%04x">Bitmap showing which onboard controllers and sensors
+        are present. Value of 0: not present. Value of 1: present.</field>
+      <field type="uint32_t" name="onboard_control_sensors_enabled" enum="MAV_SYS_STATUS_SENSOR"
+        display="bitmask" print_format="0x%04x">Bitmap showing which onboard controllers and sensors
+        are enabled: Value of 0: not enabled. Value of 1: enabled.</field>
+      <field type="uint32_t" name="onboard_control_sensors_health" enum="MAV_SYS_STATUS_SENSOR"
+        display="bitmask" print_format="0x%04x">Bitmap showing which onboard controllers and sensors
+        have an error (or are operational). Value of 0: error. Value of 1: healthy.</field>
+      <field type="uint16_t" name="voltage_battery" units="mV">Battery voltage, UINT16_MAX: Voltage
+        not sent by autopilot</field>
+      <field type="int16_t" name="current_battery" units="cA">Battery current, -1: Current not sent
+        by autopilot</field>
+      <field type="int16_t" name="current_consumed" units="mAh">Consumed charge, in milliampere
+        hours (1 = 1 mAh), -1: autopilot does not provide mAh consumption estimate</field>
+      <field type="uint8_t" name="ekf_checks" display="bitmask">Bitmask indicating ekf checks 1:
+        check ok 0: check failed. 1bit-vel; 2bit-pos; 3bit-ght; 4bit-mag; 5bit-arspd; MSB convention</field>
+      <field type="int8_t" name="battery_remaining" units="%">Battery energy remaining, -1: Battery
+        remaining energy not sent by autopilot</field>
+      <field type="uint32_t" name="sys_checks" display="bitmask">Bitmask indicating sys checks 1:
+        status ok 0: status failed. 1bit-chute release;</field>
+      <field type="uint16_t" name="uav_sn_id">id of uav, we get from serial number</field>
+    </message>
+  </messages>
+</mavlink>
